@@ -1,11 +1,10 @@
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 function Login() {
 
     const navigate = useNavigate();
-
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -43,14 +42,17 @@ function Login() {
             .then(res => {
                 swAlert(<h2>Perfecto, ingresaste correctamente</h2>)
                 const tokenRecibido = res.data.token;
-                localStorage.setItem('token', tokenRecibido);
+                sessionStorage.setItem('token', tokenRecibido);
                 navigate("/listado");
             })
     }
 
+    let token = sessionStorage.getItem('token');
 
     return (
         <>
+            { token && <Navigate to="/listado"/>}
+
             <h2>Formulario de login</h2>
             <form onSubmit={submitHandler}>
                 <label>
