@@ -6,8 +6,9 @@ function Listado () {
     const navigation = useNavigate();
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
+
         if (!token) {
-            const token = localStorage.getItem('token');
             navigation("/", { replace: true});
         }        
     }, [])
